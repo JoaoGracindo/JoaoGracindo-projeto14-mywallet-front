@@ -12,8 +12,8 @@ export default function App(){
         <BrowserRouter>
             <GlobalStyle/>
             <Routes>
-                <Route path="/loggin" element={<Loggin/>}/>
-                <Route path="/sing-up" element={<SingUp/>}/>
+                <Route path="/" element={<Loggin/>}/>
+                <Route path="/sign-up" element={<SingUp/>}/>
                 <Route path="/myAccount" element={<MyAccount/>}/>
                 <Route path="/transaction" element={<Transaction/>}/>
             </Routes>
@@ -23,9 +23,9 @@ export default function App(){
 
 const GlobalStyle = createGlobalStyle`
     * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    background-color: #E5E5E5;
-  }
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        background-color: #8C11BE;
+    }
   `;
