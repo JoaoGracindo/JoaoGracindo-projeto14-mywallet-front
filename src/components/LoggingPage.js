@@ -1,8 +1,35 @@
-import axios from "axios"
-import { Link } from "react-router-dom"
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Loggin(){
-    function validate(){
+    const navigate = useNavigate()
+
+    const [form, setForm] = useState({
+        email: '',
+        senha: ''
+    });
+
+    function handleForm(e){
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    }
+    async function validate(e){
+        e.preventDefault();
+        let token;
+
+        try{
+            const promise = await axios.post('http://localhost:5000/', form);
+            token = promise.data.token;
+            console.log(token)
+            navigate('/myAccount');
+
+        }catch(err){
+            console.log(err);
+
+        }
 
     }
 
@@ -15,14 +42,16 @@ export default function Loggin(){
                         name='email'
                         required
                         placeholder="E-mail"
+                        onChange={handleForm}
                 />
 
                 <input
                         data-test="password"
                         type='password'
-                        name='password'
+                        name='senha'
                         required
                         placeholder="Senha"
+                        onChange={handleForm}
                 />
 
                 <button type="submit"/>

@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 
 export default function SingUp(){
+
+    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         name: '',
@@ -18,12 +20,19 @@ export default function SingUp(){
             ...form,
             [e.target.name]: e.target.value 
         });
-        console.log(form)
 
     }
 
-    function cadastrar(){
+    async function cadastrar(e){
+        e.preventDefault();
 
+        try{
+            await axios.post('http://localhost:5000/participants', form);
+        }catch(err){
+            console.log(err)
+        }
+
+        navigate('/');
     }
 
     return (
