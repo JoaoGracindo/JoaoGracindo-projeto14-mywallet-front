@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import UserContext from "../UserContext";
 
 export default function MyAccount(){
     const {token} = useContext(UserContext);
     const config = {headers: {authorization: token}};
-    const navigate = Navigate();
+    const navigate = useNavigate();
 
     const [saldo, setSaldo] = useState();
     const [transactions, setTransactions] = useState();
@@ -16,7 +16,9 @@ export default function MyAccount(){
     useEffect(() => {
         async function fetch(){
 
-            const promise = await axios.get('http://localhost:5000/transactions',config );
+               const promise = await axios.get('http://localhost:5000/transactions',config );
+
+            console.log(promise)
             const {transactions, saldo, name} = promise.data;
             setSaldo(saldo);
             setTransactions(transactions);
@@ -32,7 +34,7 @@ export default function MyAccount(){
         <>
             <header >Ola, {name}</header>
             <main>
-                {transactions.map((item) => <div>{item}</div> )}
+                {transactions.map((item) => <div>{item.amount}</div> )}
                 <div>{saldo}</div>
             </main>
             <footer>

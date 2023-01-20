@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useContext, useState } from "react"
 import UserContext from "../UserContext";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Entrada(){
     const {token} = useContext(UserContext);
     const config = {headers: {authorization: token}};
+    const navigate = useNavigate();
 
     const [body, setBody] = useState({isIncoming: true});
 
@@ -17,7 +20,10 @@ export default function Entrada(){
     }
 
     async function postTransaction(e){
-        await axios.post('/transactions', config, body)
+        e.preventDefault();
+        await axios.post('http://localhost:5000/transactions', body, config);
+        navigate('/myAccount');
+        axios.post()
     }
 
     return (

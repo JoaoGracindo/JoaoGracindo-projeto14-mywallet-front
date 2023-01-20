@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useContext, useState } from "react"
+import { useContext, useState } from "react";
 import UserContext from "../UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Saida(){
     const {token} = useContext(UserContext);
     const config = {headers: {authorization: token}};
+    const navigate = useNavigate()
 
     const [body, setBody] = useState({isIncoming: false});
 
@@ -17,7 +19,9 @@ export default function Saida(){
     }
 
     async function postTransaction(e){
-        await axios.post('/transactions', config, body)
+        e.preventDefault();
+        await axios.post('http://localhost:5000/transactions', config, body);
+        navigate('/myAccount');
     }
 
     return (

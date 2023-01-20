@@ -14,8 +14,8 @@ export default function App(){
 
     return(
         <BrowserRouter>
-            <GlobalStyle/>
             <UserContext.Provider value={{token, setToken}}>
+            <GlobalStyle/>
                 <Routes>
                     <Route path="/" element={<Loggin/>}/>
                     <Route path="/sign-up" element={<SingUp/>}/>
