@@ -3,20 +3,27 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import Loggin from "./LoggingPage";
 import MyAccount from "./MinhaContaPage";
-import Transaction from "./Movimentacao";
+import Entrada from "./Entrada";
 import SingUp from "./SignUpPage";
+import UserContext from "../UserContext";
+import Saida from "./Saida";
+import { useState } from "react";
 
 export default function App(){
+    const [token, setToken] = useState('');
 
     return(
         <BrowserRouter>
             <GlobalStyle/>
-            <Routes>
-                <Route path="/" element={<Loggin/>}/>
-                <Route path="/sign-up" element={<SingUp/>}/>
-                <Route path="/myAccount" element={<MyAccount/>}/>
-                <Route path="/transaction" element={<Transaction/>}/>
-            </Routes>
+            <UserContext.Provider value={{token, setToken}}>
+                <Routes>
+                    <Route path="/" element={<Loggin/>}/>
+                    <Route path="/sign-up" element={<SingUp/>}/>
+                    <Route path="/myAccount" element={<MyAccount/>}/>
+                    <Route path="/entrada" element={<Entrada/>}/>
+                    <Route path="/saida" element={<Saida/>}/>
+                </Routes>
+            </UserContext.Provider>
         </BrowserRouter>
     )
 }

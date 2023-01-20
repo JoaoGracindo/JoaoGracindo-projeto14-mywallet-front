@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import UserContext from "../UserContext";
 
 export default function Loggin(){
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {setToken} = useContext(UserContext)
 
     const [form, setForm] = useState({
         email: '',
@@ -22,8 +24,9 @@ export default function Loggin(){
 
         try{
             const promise = await axios.post('http://localhost:5000/', form);
-            token = promise.data.token;
-            console.log(token)
+            token = 'Bearer ' + promise.data;
+            setToken(token);
+
             navigate('/myAccount');
 
         }catch(err){
@@ -54,7 +57,7 @@ export default function Loggin(){
                         onChange={handleForm}
                 />
 
-                <button type="submit"/>
+                <button data-test="sign-in-submit" type="submit"/>
             </form>
             <Link to='/sign-up'>Ainda não tem conta? inscreva-se!</Link>
         </>
