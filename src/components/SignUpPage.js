@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
-import styled from "styled-components";
+import StyledAuth from "./AuthStyle";
 
 export default function SingUp(){
 
@@ -36,7 +36,8 @@ export default function SingUp(){
     }
 
     return (
-        <>
+        <StyledAuth>
+            <h1>MY Wallet</h1>
             <form onSubmit={cadastrar}>
                 <input
                      data-test="name"
@@ -74,9 +75,9 @@ export default function SingUp(){
                      onChange={handleForm}
                 />
 
-                <button data-test="sign-up-submit" type='submit'/>
+                <button data-test="sign-in-submit" type="submit">Cadastrar</button>
             </form>
             <Link to='/'>Se já tem conta, faça login aqui.</Link>
-        </>
+        </StyledAuth>
     )
 }
