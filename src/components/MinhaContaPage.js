@@ -17,9 +17,8 @@ export default function MyAccount(){
     useEffect(() => {
         async function fetch(){
 
-               const promise = await axios.get('http://localhost:5000/transactions',config );
+               const promise = await axios.get(`${process.env.REACT_APP_API_URL}transactions`,config );
 
-            console.log(promise)
             const {transactions, saldo, name} = promise.data;
             setSaldo(saldo);
             setTransactions(transactions);
@@ -29,13 +28,24 @@ export default function MyAccount(){
         
     }, []);
 
+    async function logout(){
+        
+        try{
+            await axios.delete(`${process.env.REACT_APP_API_URL}`,config );
+            navigate('/');
+        }catch(err){
+            
+            return console.log(err);
+        }
+    }
+
     if(!name) return <></>
 
     return (
         <StyledAcount>
             <header>
-            <span data-test="user-name">Ola, {name}</span>
-            <span data-test="logout"></span>
+                <span data-test="user-name">Ola, {name}</span>
+                <span onClick={logout}><ion-icon data-test="logout" name="log-out-outline"></ion-icon></span>
             </header>
             <main>
                 {transactions.map((item) =>{ 
@@ -51,8 +61,8 @@ export default function MyAccount(){
                 <span data-test="total-amount">{saldo}</span>
             </div>
             <footer>
-                <button data-test="new-income" onClick={() => navigate('/entrada')}>Nova entrada</button>
-                <button data-test="new-expense" onClick={() => navigate('/saida')}>Nova saida</button>
+                <button data-test="new-income" onClick={() => navigate('/nova-entrada')}>Nova entrada</button>
+                <button data-test="new-expense" onClick={() => navigate('/nova-saida')}>Nova saida</button>
             </footer>
         </StyledAcount>
     )

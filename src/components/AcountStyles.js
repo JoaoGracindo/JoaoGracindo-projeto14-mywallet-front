@@ -9,6 +9,9 @@ const StyledAcount = styled.div`
         color:white;
         font-size:28px;
         font-weight:600;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
     }
 
     main{

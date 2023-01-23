@@ -21,8 +21,8 @@ export default function Saida(){
 
     async function postTransaction(e){
         e.preventDefault();
-        await axios.post('http://localhost:5000/transactions', body, config);
-        navigate('/myAccount');
+        await axios.post(`${process.env.REACT_APP_API_URL}transactions`, body, config);
+        navigate('/home');
     }
 
     return (

@@ -24,11 +24,11 @@ export default function Loggin(){
         let token;
 
         try{
-            const promise = await axios.post('http://localhost:5000/', form);
+            const promise = await axios.post(`${process.env.REACT_APP_API_URL}`, form);
             token = 'Bearer ' + promise.data;
             setToken(token);
 
-            navigate('/myAccount');
+            navigate('/home');
 
         }catch(err){
             console.log(err);
@@ -61,7 +61,7 @@ export default function Loggin(){
 
                 <button data-test="sign-in-submit" type="submit">Entrar</button>
             </form>
-            <Link to='/sign-up'>Ainda não tem conta? inscreva-se!</Link>
+            <Link to='/cadastro'>Ainda não tem conta? inscreva-se!</Link>
         </StyledAuth>
     )
 }

@@ -27,7 +27,7 @@ export default function SingUp(){
         e.preventDefault();
 
         try{
-            await axios.post('http://localhost:5000/participants', form);
+            await axios.post(`${process.env.REACT_APP_API_URL}participants`, form);
         }catch(err){
             console.log(err)
         }

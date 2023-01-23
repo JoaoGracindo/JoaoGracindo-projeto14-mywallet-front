@@ -18,10 +18,10 @@ export default function App(){
             <GlobalStyle/>
                 <Routes>
                     <Route path="/" element={<Loggin/>}/>
-                    <Route path="/sign-up" element={<SingUp/>}/>
-                    <Route path="/myAccount" element={<MyAccount/>}/>
-                    <Route path="/entrada" element={<Entrada/>}/>
-                    <Route path="/saida" element={<Saida/>}/>
+                    <Route path="/cadastro" element={<SingUp/>}/>
+                    <Route path="/home" element={<MyAccount/>}/>
+                    <Route path="/nova-entrada" element={<Entrada/>}/>
+                    <Route path="/nova-saida" element={<Saida/>}/>
                 </Routes>
             </UserContext.Provider>
         </BrowserRouter>
