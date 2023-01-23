@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react"
 import UserContext from "../UserContext";
 import { useNavigate } from "react-router-dom";
+import StyledTransaction from "./TransactionsStyles";
 
 
 export default function Entrada(){
@@ -27,23 +28,25 @@ export default function Entrada(){
     }
 
     return (
-        <>
-            <header>Nova entrada</header>
+        <StyledTransaction>
             <form onSubmit={postTransaction}>
+            <h1>Nova entrada</h1>
                 <input
+                    data-test="registry-amount-input"
                     name="amount"
                     onChange={handleBody}
                     required
                     placeholder="Valor"
                 />
                 <input
+                    data-test="registry-name-input"
                     name="title"
                     onChange={handleBody}
                     required
                     placeholder="Descrição"
                 />
-                <button type="submit">Salvar Entrada</button>
+                <button data-test="registry-save" type="submit">Salvar Entrada</button>
             </form>
-        </>
+        </StyledTransaction>
     )
 }

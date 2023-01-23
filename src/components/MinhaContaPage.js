@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import UserContext from "../UserContext";
+import StyledAcount from "./AcountStyles";
 
 export default function MyAccount(){
     const {token} = useContext(UserContext);
@@ -31,16 +32,28 @@ export default function MyAccount(){
     if(!name) return <></>
 
     return (
-        <>
-            <header >Ola, {name}</header>
+        <StyledAcount>
+            <header>
+            <span data-test="user-name">Ola, {name}</span>
+            <span data-test="logout"></span>
+            </header>
             <main>
-                {transactions.map((item) => <div>{item.amount}</div> )}
-                <div>{saldo}</div>
+                {transactions.map((item) =>{ 
+                        return (<div className="transaction">
+                                    <span>{item.date}</span>
+                                    <span data-test="registry-name">{item.title}</span>
+                                    <span style={item.isIncoming ? {color:"green"} : {color:"red"}} data-test="registry-amount">{item.amount}</span>
+                                </div>)
+                    } )}
             </main>
+            <div className="saldo">
+                <span>Saldo</span>
+                <span data-test="total-amount">{saldo}</span>
+            </div>
             <footer>
-                <button onClick={() => navigate('/entrada')}>Nova entrada</button>
-                <button onClick={() => navigate('/saida')}>Nova saida</button>
+                <button data-test="new-income" onClick={() => navigate('/entrada')}>Nova entrada</button>
+                <button data-test="new-expense" onClick={() => navigate('/saida')}>Nova saida</button>
             </footer>
-        </>
+        </StyledAcount>
     )
 }
